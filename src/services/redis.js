@@ -1,4 +1,4 @@
-const Redis = require('ioredis');
+import Redis from 'ioredis';
 const redis = new Redis(process.env.REDIS_URL);
-module.exports = redis;
+export default redis;
 // src/services/redis.js

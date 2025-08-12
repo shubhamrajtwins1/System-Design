@@ -1,8 +1,8 @@
-const express = require('express');
-const { getData, addToQueue } = require('../controllers/mainController');
+import { Router } from 'express';
+import { getData, addToQueue } from '../controllers/mainController.js';
 
-const router = express.Router();
+const router = Router();
 router.get('/data/:id', getData);
 router.post('/process', addToQueue);
 
-module.exports = router;
+export default router;

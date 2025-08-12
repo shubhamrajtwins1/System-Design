@@ -1,7 +1,7 @@
-const redis = require('../services/redis');
-const queue = require('../queue/jobQueue');
+import redis from '../services/redis.js';
+import queue from '../queue/jobQueue.js';
 
-exports.getData = async (req, res) => {
+export async function getData(req, res) {
     const { id } = req.params;
 
     const cached = await redis.get(`data:${id}`);
@@ -14,9 +14,9 @@ exports.getData = async (req, res) => {
     await redis.set(`data:${id}`, JSON.stringify(data), 'EX', 60); // cache for 60s
 
     res.json({ source: 'db', data });
-};
+}
 
-exports.addToQueue = async (req, res) => {
+export async function addToQueue(req, res) {
     const job = await queue.add('processJob', { task: 'clean-data' });
     res.json({ jobId: job.id });
-};
+}

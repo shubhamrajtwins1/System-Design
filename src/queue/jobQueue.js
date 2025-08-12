@@ -1,7 +1,9 @@
-const { Queue } = require('bullmq');
+import { Queue } from 'bullmq';
+import dotenv from 'dotenv';
+dotenv.config(); // Load environment variables from .env file
 const connection = { connection: { host: 'localhost', port: 6379 } };
 
-const queue = new Queue('taskQueue', connection);
+const queue = new Queue(process.env.QUEUE_NAME ?? "taskQueue", connection);
 
-module.exports = queue;
+export default queue;
 // src/queue/jobQueue.js
