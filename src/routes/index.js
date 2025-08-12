@@ -1,7 +1,8 @@
 const express = require('express');
-const router = express.Router();
-const { sayHello } = require('../controllers/sampleController');
+const { getData, addToQueue } = require('../controllers/mainController');
 
-router.get('/', sayHello);
+const router = express.Router();
+router.get('/data/:id', getData);
+router.post('/process', addToQueue);
 
 module.exports = router;
